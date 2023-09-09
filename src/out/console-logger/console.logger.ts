@@ -1,11 +1,12 @@
 import { IStreamLoggaer } from '../../core/handlers/interfaces/stream-logger';
 
 export class ConsoleLogger implements IStreamLoggaer {
-	private instance!: ConsoleLogger;
 
-	public getInstance() {
-		if(this.instance) {
-			return this.instance;
+	private constructor(){};
+
+	public static getInstance(instance: ConsoleLogger) {
+		if(instance) {
+			return instance;
 		}
 
 		return new ConsoleLogger();
