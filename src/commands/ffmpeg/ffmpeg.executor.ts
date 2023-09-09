@@ -1,6 +1,6 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { CommandExecutor } from '../../core/executor/command.executor';
-import { IStreamLoggaer } from '../../core/handlers/interfaces/stream-logger';
+import { IStreamLogger } from '../../core/handlers/interfaces/stream-logger';
 import { ICommandExecFfmpeg, IFfmpegInput } from './ffmpeg.types';
 import { FileService } from '../../core/files/file.service';
 import { PromptService } from '../../core/prompt/prompt.service';
@@ -11,7 +11,7 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 	private fileService: FileService = new FileService();
 	private promptService: PromptService = new PromptService();
 
-	constructor(logger: IStreamLoggaer){
+	constructor(logger: IStreamLogger){
 		super(logger);
 	}
 
@@ -38,7 +38,7 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 		return spawn(command, args);
 	}
 
-	protected processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLoggaer): void {
+	protected processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void {
 		const handler = new StreamHandler(logger);
 
 		handler.processOutput(stream);
